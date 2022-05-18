@@ -7,6 +7,8 @@ public class Personnage {
 
     private IntegerProperty y;
     private IntegerProperty x;
+    private boolean keypressed;
+    private boolean keycode;
 
     public Personnage (int x, int y) {
         super();
@@ -27,10 +29,28 @@ public class Personnage {
     public void setY(SimpleIntegerProperty y) {
         this.y = y;
     }
+
+/*    public void deplacPers(){
+        if(keypressed == true){
+            if (Z) {
+                this.getY().setValue(this.getY().getValue() + 32);
+            } else if(keycode == DOWN){
+                this.getY().setValue(this.getY().getValue()-32);
+            }
+            else if(keycode == RIGHT){
+                this.x.set(this.getX().getValue()+32);
+            }
+            else if(keycode == LEFT){
+                this.x.set(this.getX().getValue()-32);
+            }
+        }
+
+
+    }*/
+
     public void DeplacementHeroDroite () {
         this.x.set(this.getX().getValue()+32);
     }
-
 
     public void DeplacementHeroGauche () {
         this.x.set(this.getX().getValue()-32);
