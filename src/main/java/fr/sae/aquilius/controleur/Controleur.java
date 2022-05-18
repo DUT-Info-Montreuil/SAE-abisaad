@@ -55,7 +55,7 @@ public class Controleur implements Initializable {
 //		ImageView perso = new ImageView(persoTerra);
 //		System.out.println(personnage);
 
-//		this.paneMap.getChildren().add(perso);
+//		this.paneMap.getChildren().add(perso); 8
 
         paneTerrain.setPrefRows(20);
         paneTerrain.setPrefColumns(30);
