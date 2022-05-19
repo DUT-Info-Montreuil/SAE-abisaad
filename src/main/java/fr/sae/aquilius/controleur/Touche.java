@@ -1,0 +1,33 @@
+package fr.sae.aquilius.controleur;
+
+import java.util.ResourceBundle.Control;
+
+import fr.sae.aquilius.model.Personnage;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
+
+public class Touche implements EventHandler<KeyEvent> {
+
+    private Personnage perso;
+
+    public Touche(Personnage perso) {
+        this.perso = perso;
+    }
+
+    public void handle(KeyEvent e){
+        System.out.println(e.getCode());
+
+       // controleur.Controleur(persoTerra);
+        switch(e.getCode()) {
+
+            case D:
+                perso.DeplacementHeroDroite();;
+                break;
+
+
+
+            default:
+                break;
+        }
+    }
+}

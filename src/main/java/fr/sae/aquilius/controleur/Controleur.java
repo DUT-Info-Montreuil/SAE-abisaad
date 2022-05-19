@@ -29,12 +29,15 @@ public class Controleur implements Initializable {
     private VuePersonnage vuePerso;
 
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("fghfghfghjghj");
         Terrain terrain = new Terrain(30, 20);
         terrain.lireTerrain();
         Personnage personnage = new Personnage(30,20);
         this.vuePerso = new VuePersonnage(paneMap,personnage);
         vuePerso.addImgPersonnage();
         int[][] codeTuiles = terrain.getCodeTuiles();
+
+        borderTerrain.setOnKeyPressed(new Touche(personnage));
 
 
         Image ciel = null;
@@ -45,17 +48,6 @@ public class Controleur implements Initializable {
             sol = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/sol.png"));
             terre = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/terre.png"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
-
-
-        //creer une game loop
-//		Image persoTerra = new Image("aquilius/ressources/persoTerra.png");
-
-
-
-//		ImageView perso = new ImageView(persoTerra);
-//		System.out.println(personnage);
-
-//		this.paneMap.getChildren().add(perso); 8
 
         paneTerrain.setPrefRows(20);
         paneTerrain.setPrefColumns(30);
