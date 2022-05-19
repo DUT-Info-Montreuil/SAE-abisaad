@@ -12,7 +12,7 @@ public class Personnage {
         super();
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        int vitesse = 32;
+        int vitesse = 16;
     }
 
     public IntegerProperty getX() {
@@ -29,15 +29,15 @@ public class Personnage {
     }
 
     public void DeplacementHeroDroite() {
-        this.x.set(this.getX().getValue()+32);
+        this.x.set(this.getX().getValue()+16);
     }
     public void DeplacementHeroGauche() {
-        this.x.set(this.getX().getValue()-32);
+        this.x.set(this.getX().getValue()-16);
     }
     public void DeplacementHeroHaut() {
-        this.getY().setValue(this.getY().getValue()+32);
+        this.getY().setValue(this.getY().getValue()-16);
     }
     public void DeplacementHeroBas() {
-        this.getY().setValue(this.getY().getValue()-32);
+        this.getY().setValue(this.getY().getValue()+16);
     }
 }
