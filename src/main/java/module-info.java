@@ -3,6 +3,7 @@ module fr.sae.aquilius {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
+    requires javafx.graphics;
 
 
     opens fr.sae.aquilius to javafx.fxml;

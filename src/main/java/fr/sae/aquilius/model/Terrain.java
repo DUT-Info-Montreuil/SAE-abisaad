@@ -24,16 +24,13 @@ public class Terrain {
             while (jsonReader.hasNext())
             {
                 hauteur++;
-
                 jsonReader.nextName();
-
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
                     jsonReader.nextInt();
                     if (!widthSave) largeur++;
                 }
                 jsonReader.endArray();
-
                 widthSave = true;
             }
             jsonReader.endObject();
@@ -49,21 +46,19 @@ public class Terrain {
             while (jsonReader.hasNext())
             {
                 jsonReader.nextName();
-
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
                     codeTuiles[i][j] = jsonReader.nextInt();
                     j++;
                 }
                 jsonReader.endArray();
-
                 j = 0;
                 i++;
             }
             jsonReader.endObject();
         } catch (Exception e) { e.printStackTrace(); }
-
     }
+
     public Terrain(int largeur, int hauteur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
@@ -73,11 +68,9 @@ public class Terrain {
     public int[][] getCodeTuiles() {
         return codeTuiles;
     }
-
     public int getLargeur () {
         return this.largeur;
     }
-
     public int getHauteur () {
         return this.hauteur;
     }

@@ -8,14 +8,16 @@ import javafx.scene.layout.Pane;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class VuePersonnage {
+public class PersonnageVue {
+
     private Pane paneMap;
     private  ImageView imagePersoP;
-
     private Personnage personnage;
 
-    public VuePersonnage(Pane paneMap, Personnage personnage) {
+
+    public PersonnageVue(Pane paneMap, Personnage personnage) {
         Image imgPers = null;
+
         try {
             imgPers = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/persoTerra.png"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
