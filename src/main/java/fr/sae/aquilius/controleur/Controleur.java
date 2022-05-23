@@ -33,8 +33,8 @@ public class Controleur implements Initializable {
         Terrain terrain = new Terrain(30, 20);
         terrain.lireTerrain();
         this.vueTerrain=new TerrainVue(paneTerrain,terrain);
-       // vueTerrain.addImgTuilles();
-      //  int[][] codeTuiles = terrain.getCodeTuiles();
+        vueTerrain.addImgTuilles();
+        int[][] codeTuiles = terrain.getCodeTuiles();
         // TERRAIN //
 
         // Personnage //
