@@ -1,7 +1,5 @@
 package fr.sae.aquilius.controleur;
 
-import java.util.ResourceBundle.Control;
-
 import fr.sae.aquilius.model.Personnage;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
@@ -21,7 +19,7 @@ public class Touche implements EventHandler<KeyEvent> {
         switch(e.getCode()) {
 
             case D:
-                perso.DeplacementHeroDroite();;
+                perso.DeplacementHeroDroite();
                 break;
             case Q:
                 perso.DeplacementHeroGauche();

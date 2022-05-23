@@ -4,11 +4,14 @@ import fr.sae.aquilius.model.Personnage;
 import fr.sae.aquilius.model.Terrain;
 import fr.sae.aquilius.vue.PersonnageVue;
 import fr.sae.aquilius.vue.TerrainVue;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +28,7 @@ public class Controleur implements Initializable {
     private Personnage personnage;
     private PersonnageVue vuePerso;
     private TerrainVue vueTerrain;
+    private Timeline gameLoop;
 
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,55 +42,37 @@ public class Controleur implements Initializable {
         // TERRAIN //
 
         // Personnage //
-        Personnage personnage = new Personnage(30,20);
+        Personnage personnage = new Personnage(180,350);
         this.vuePerso = new PersonnageVue(paneMap,personnage);
         vuePerso.addImgPersonnage();
         // Personnage //
 
         // Controle du Personnage //
         borderTerrain.setOnKeyPressed(new Touche(personnage));
+        borderTerrain.setOnKeyReleased(new ToucheArret(personnage));
         // Controle du Personnage //
 
-
-/*
-        Image ciel = null;
-        Image sol = null;
-        Image terre = null;
-
-        try {
-            ciel = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/ciel.png"));
-            sol = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/sol.png"));
-            terre = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/terre.png"));
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
-*/
 
         paneTerrain.setPrefRows(20);
         paneTerrain.setPrefColumns(30);
 
-/*        for(int ligne=0 ; ligne<codeTuiles.length ;ligne++ ) {
-            for(int col=0 ; col<codeTuiles[ligne].length; col++) {
+            gameLoop = new Timeline();
+            gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-                int choix = codeTuiles[ligne][col];
-                switch(choix){
-                    case 1:
-                        this.paneTerrain.getChildren().add(new ImageView(sol));
-                        break;
+            KeyFrame kf = new KeyFrame(
+                    // on définit le FPS (nbre de frame par seconde)
+                    Duration.seconds(0.1),
+                    // on définit ce qui se passe à chaque frame
+                    // c'est un eventHandler d'ou le lambda
+                    (ev ->{
+                        personnage.deplacer();
+                        personnage.arreter();
 
-                    case 2:
-                        this.paneTerrain.getChildren().add(new ImageView(terre));
-                        break;
-
-                    case 3:
-                        this.paneTerrain.getChildren().add(new ImageView(ciel));
-                        break;
+                    })
+            );
+            gameLoop.getKeyFrames().add(kf);
+            gameLoop.play();
 
 
-
-                }
-
-            }
-
-        }*/
-        System.out.println(personnage);
     }
 }

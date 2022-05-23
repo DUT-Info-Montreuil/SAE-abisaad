@@ -55,8 +55,6 @@ public class TerrainVue {
                     case 3:
                         this.paneTerrain.getChildren().add(new ImageView(ciel));
                         break;
-
-
                 }
             }
         }
