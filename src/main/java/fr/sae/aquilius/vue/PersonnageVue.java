@@ -29,8 +29,8 @@ public class PersonnageVue {
 
     public void addImgPersonnage() {
         paneMap.getChildren().add(imagePersoP);
-        imagePersoP.translateXProperty().bind(personnage.getX());
-        imagePersoP.translateYProperty().bind(personnage.getY());
+        imagePersoP.translateXProperty().bind(personnage.xProperty());
+        imagePersoP.translateYProperty().bind(personnage.yProperty());
     }
 
 

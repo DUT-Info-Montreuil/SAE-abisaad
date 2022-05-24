@@ -27,9 +27,9 @@ public class Touche implements EventHandler<KeyEvent> {
             case Z:
                 perso.DeplacementHeroHaut();
                 break;
-            case S:
+            /*case S:
                 perso.DeplacementHeroBas();
-                break;
+                break;*/
 
 
             default:

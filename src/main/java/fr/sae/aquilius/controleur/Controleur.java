@@ -45,7 +45,7 @@ public class Controleur implements Initializable {
         Personnage personnage = new Personnage(180,350);
         this.vuePerso = new PersonnageVue(paneMap,personnage);
         vuePerso.addImgPersonnage();
-        // Personnage //
+
 
         // Controle du Personnage //
         borderTerrain.setOnKeyPressed(new Touche(personnage));
@@ -66,7 +66,7 @@ public class Controleur implements Initializable {
                     // c'est un eventHandler d'ou le lambda
                     (ev ->{
                         personnage.deplacer();
-                        personnage.arreter();
+             /*           personnage.arreter();*/
 
                     })
             );

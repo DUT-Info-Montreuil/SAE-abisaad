@@ -3,7 +3,7 @@ package fr.sae.aquilius.model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Personnage {
+public class Personnage{
 
     private IntegerProperty y;
     private IntegerProperty x;
@@ -11,6 +11,7 @@ public class Personnage {
     private boolean gauche;
     private boolean bas;
     private boolean haut;
+    private Terrain terrain;
 
     public Personnage (int x, int y) {
         super();
@@ -18,90 +19,122 @@ public class Personnage {
         this.y = new SimpleIntegerProperty(y);
         this.droite = false;
         this.gauche = false;
-        this.bas = false;
+        this.bas = true;
         this.haut = false;
     }
 
-    public IntegerProperty getX() {
-        return this.x;
+    public int getX() {
+        return this.x.getValue();
     }
-    public IntegerProperty getY() {
-        return this.y;
+    public int getY() {
+        return this.y.getValue();
     }
 
+    public void setX(int x) {
+        this.x.set(x);
+    }
 
+    public void setY(int y) {
+        this.y.set(y);
+    }
 
+    public IntegerProperty xProperty() {
+        return x;
+    }
+    public IntegerProperty yProperty(){
+        return y;
+    }
 
     public void deplacer(){
         if (droite){
-            this.x.set(this.getX().getValue()+10);
+            this.setX(this.getX()+10);
         }
         else if (gauche){
-            this.x.set(this.getX().getValue()-10);
+            this.setX(this.getX()-10);
         }
         else if (haut){
-            this.getY().setValue(this.getY().getValue()-10);
+            this.setY(this.getY()-10);
         }
-        else if(bas){
-            this.getY().setValue(this.getY().getValue()+10);
+        else if(bas && !estAuSol()){
+            this.setY(this.getY()+10);
         }
         System.out.println(bas);
     }
 
-    public void arreter(){
+/*    public void arreter(){
         if (!droite){
-            this.x.set(this.getX().getValue());
+            this.x.set(this.getX());
         }
         else if (!gauche){
-            this.x.set(this.getX().getValue());
+            this.x.set(this.getX());
         }
         else if (!haut){
-            this.y.set(this.getY().getValue());
+            this.y.set(this.getY());
         }
         else if(!bas){
-            this.y.set(this.getY().getValue());
+            this.y.set(this.getY());
         }
-    }
+    }*/
 
 
 
     public void DeplacementHeroDroite() {
         droite = true;
-       // this.x.set(this.getX().getValue()+16);
+
     }
 
     public void DeplacementHeroGauche() {
         gauche = true;
-        //this.x.set(this.getX().getValue()-16);
     }
 
     public void DeplacementHeroHaut() {
         haut = true;
-        //this.getY().setValue(this.getY().getValue()-16);
+        bas=false;
     }
 
-    public void DeplacementHeroBas() {
+/*    public void DeplacementHeroBas() {
         bas = true;
-        //this.getY().setValue(this.getY().getValue()+16);
-    }
+    }*/
 
     public void arretDeplacementHeroDroite() {
         droite = false;
-        // this.x.set(this.getX().getValue()+16);
+
     }
 
     public void arretDeplacementHeroGauche() {
         gauche = false;
-        //this.x.set(this.getX().getValue()-16);
+
     }
 
     public void arretDeplacementHeroHaut() {
         haut = false;
-        //this.x.set(this.getX().getValue()-16);
+        bas = true;
+
     }
 
-    public void arretDeplacementHeroBas() {
+/*    public void arretDeplacementHeroBas() {
         bas = false;
-        //this.x.set(this.getX().getValue()-16);
+
+    }*/
+
+
+    public boolean estAuSol(){
+        boolean sol ;
+        int xPer = this.getX();
+        int yPer = this.getY();
+
+        if(terrain.getBlock(xPer,yPer+32) != 3 ){
+            sol = true;
+        }
+        else if(terrain.getBlock(xPer+32,yPer+32)!=3){
+            sol= true;
+        }
+        else {
+            sol=false;
+        }
+        return sol;
+
     }
+
+
 }

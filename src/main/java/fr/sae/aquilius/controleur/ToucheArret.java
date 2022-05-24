@@ -27,9 +27,9 @@ import javafx.scene.input.KeyEvent;
                 case Z:
                     perso.arretDeplacementHeroHaut();
                     break;
-                case S:
+                /*case S:
                     perso.arretDeplacementHeroBas();
-                    break;
+                    break;*/
 
 
                 default:

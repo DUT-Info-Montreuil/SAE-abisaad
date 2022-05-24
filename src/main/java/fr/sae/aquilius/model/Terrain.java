@@ -8,6 +8,8 @@ public class Terrain {
 
     private int largeur ;
     private int hauteur ;
+    private int sol ; // hauteur du sol
+    private int plafond; //hauteur du plafond
     private int[][] codeTuiles ;
 
 
@@ -64,7 +66,6 @@ public class Terrain {
         this.hauteur = hauteur;
     }
 
-
     public int[][] getCodeTuiles() {
         return codeTuiles;
     }
@@ -75,4 +76,21 @@ public class Terrain {
         return this.hauteur;
     }
 
+    public int getBlock(int x, int y){
+        int block;
+
+        block = codeTuiles[y/32][x/32];
+        return block;
+    }
+
+/*
+    public boolean graviter(){
+        boolean tombe = true;
+
+        if(!estAuSol().){
+            tombe=false;
+            this.y.setY
+        }
+
+    }*/
 }
