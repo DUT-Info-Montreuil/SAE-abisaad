@@ -66,7 +66,7 @@ public class Controleur implements Initializable {
                     // c'est un eventHandler d'ou le lambda
                     (ev ->{
                         personnage.deplacer();
-                        personnage.arreter();
+                        personnage.appliqueGravite();
 
 
                     })
