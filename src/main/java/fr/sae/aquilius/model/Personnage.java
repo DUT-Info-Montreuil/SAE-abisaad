@@ -78,10 +78,7 @@ public class Personnage{
 
 
 
-    public void DeplacementHeroDroite() {
-        droite = true;
-
-    }
+    public void DeplacementHeroDroite() { droite = true; }
 
     public void DeplacementHeroGauche() {
         gauche = true;
@@ -137,7 +134,7 @@ public class Personnage{
     }*/
 
     public void appliqueGravite(){
-        this.y.set((int)(this.y.getValue()+9.81));
+        this.y.set((int)(this.y.getValue()+9.15));
     }
 
 }
