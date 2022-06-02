@@ -61,7 +61,7 @@ public class Personnage{
         System.out.println(bas);
     }
 
-/*    public void arreter(){
+    public void arreter(){
         if (!droite){
             this.x.set(this.getX());
         }
@@ -74,7 +74,7 @@ public class Personnage{
         else if(!bas){
             this.y.set(this.getY());
         }
-    }*/
+    }
 
 
 
