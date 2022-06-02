@@ -34,7 +34,6 @@ public class TerrainVue {
             ciel = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/ciel.png"));
             sol = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/sol.png"));
             terre = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/terre.png"));
-            System.out.println("21656156");
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
         int[][] codeTuiles = terrain.getCodeTuiles();

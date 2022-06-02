@@ -55,7 +55,7 @@ public class Personnage{
         else if (haut){
             this.setY(this.getY()-10);
         }
-        else if(bas && !estAuSol()){
+        else if(bas){
             this.setY(this.getY()+10);
         }
         System.out.println(bas);
@@ -92,9 +92,9 @@ public class Personnage{
         bas=false;
     }
 
-/*    public void DeplacementHeroBas() {
+   public void DeplacementHeroBas() {
         bas = true;
-    }*/
+    }
 
     public void arretDeplacementHeroDroite() {
         droite = false;
@@ -112,13 +112,13 @@ public class Personnage{
 
     }
 
-/*    public void arretDeplacementHeroBas() {
+    public void arretDeplacementHeroBas() {
         bas = false;
 
-    }*/
+    }
 
 
-    public boolean estAuSol(){
+/*    public boolean estAuSol(){
         boolean sol ;
         int xPer = this.getX();
         int yPer = this.getY();
@@ -134,7 +134,10 @@ public class Personnage{
         }
         return sol;
 
-    }
+    }*/
 
+    public void appliqueGravite(){
+        this.y.set((int)(this.y.getValue()+9.81));
+    }
 
 }
