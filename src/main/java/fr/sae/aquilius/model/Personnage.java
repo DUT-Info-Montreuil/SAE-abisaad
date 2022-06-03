@@ -111,12 +111,10 @@ public class Personnage{
         bas = true;
 
     }
-
-/*    public void arretDeplacementHeroBas() {
+/*  public void arretDeplacementHeroBas() {
         bas = false;
 
     }*/
-
 
     public boolean estAuSol(){
         boolean sol ;

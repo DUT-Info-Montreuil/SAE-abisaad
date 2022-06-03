@@ -31,7 +31,6 @@ public class Touche implements EventHandler<KeyEvent> {
                 perso.DeplacementHeroBas();
                 break;*/
 
-
             default:
                 break;
         }
