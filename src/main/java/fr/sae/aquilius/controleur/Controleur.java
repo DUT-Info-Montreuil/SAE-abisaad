@@ -1,5 +1,6 @@
 package fr.sae.aquilius.controleur;
 
+import fr.sae.aquilius.model.Inventaire;
 import fr.sae.aquilius.model.Personnage;
 import fr.sae.aquilius.model.Terrain;
 import fr.sae.aquilius.vue.PersonnageVue;
@@ -25,7 +26,6 @@ public class Controleur implements Initializable {
     @FXML
     TilePane paneTerrain;
 
-    private Personnage personnage;
     private PersonnageVue vuePerso;
     private TerrainVue vueTerrain;
     private Timeline gameLoop;
@@ -33,18 +33,24 @@ public class Controleur implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
 
-        // TERRAIN //
+        // Terrain //
         Terrain terrain = new Terrain(30, 20);
         terrain.lireTerrain();
         this.vueTerrain=new TerrainVue(paneTerrain,terrain);
         vueTerrain.addImgTuilles();
-        int[][] codeTuiles = terrain.getCodeTuiles();
-        // TERRAIN //
+        // Terrain //
+
+        //Inventaire//
+        Inventaire inventaire = new Inventaire();
+        //Inventaire//
+
 
         // Personnage //
-        Personnage personnage = new Personnage(180,350 ,terrain);
+        Personnage personnage = new Personnage(180,350 ,terrain, inventaire);
         this.vuePerso = new PersonnageVue(paneMap,personnage);
         vuePerso.addImgPersonnage();
+        // Personnage //
+
 
 
         // Controle du Personnage //
@@ -56,23 +62,21 @@ public class Controleur implements Initializable {
         paneTerrain.setPrefRows(20);
         paneTerrain.setPrefColumns(30);
 
-            gameLoop = new Timeline();
-            gameLoop.setCycleCount(Timeline.INDEFINITE);
-
-            KeyFrame kf = new KeyFrame(
-                    // on définit le FPS (nbre de frame par seconde)
-                    Duration.seconds(0.1),
-                    // on définit ce qui se passe à chaque frame
-                    // c'est un eventHandler d'ou le lambda
-                    (ev ->{
-                        personnage.deplacer();
-
-
-                    })
-            );
-            gameLoop.getKeyFrames().add(kf);
-            gameLoop.play();
-
+        //gameloop//
+        gameLoop = new Timeline();
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        KeyFrame kf = new KeyFrame(
+                // on définit le FPS (nbre de frame par seconde)
+                Duration.seconds(0.1),
+                // on définit ce qui se passe à chaque frame
+                // c'est un eventHandler d'ou le lambda
+                (ev ->{
+                    personnage.deplacer();
+                })
+        );
+        gameLoop.getKeyFrames().add(kf);
+        gameLoop.play();
+        //Gameloop//
 
     }
 }

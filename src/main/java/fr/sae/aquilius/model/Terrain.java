@@ -69,13 +69,6 @@ public class Terrain {
     public int[][] getCodeTuiles() {
         return codeTuiles;
     }
-    public int getLargeur () {
-        return this.largeur;
-    }
-    public int getHauteur () {
-        return this.hauteur;
-    }
-
     public int getBlock(int x, int y){
         int block;
         block = codeTuiles[y/32][x/32];
@@ -83,14 +76,4 @@ public class Terrain {
         return block;
     }
 
-/*
-    public boolean graviter(){
-        boolean tombe = true;
-
-        if(!estAuSol().){
-            tombe=false;
-            this.y.setY
-        }
-
-    }*/
 }

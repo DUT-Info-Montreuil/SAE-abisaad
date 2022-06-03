@@ -12,9 +12,9 @@ public class Personnage{
     private boolean bas;
     private boolean haut;
     private Terrain terrain;
+    private Inventaire inventaire;
 
-    public Personnage (int x, int y, Terrain terrain) {
-        super();
+    public Personnage (int x, int y, Terrain terrain,Inventaire inventaire) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.droite = false;
@@ -22,6 +22,7 @@ public class Personnage{
         this.bas = true;
         this.haut = false;
         this.terrain = terrain;
+        this.inventaire=inventaire;
     }
 
     public int getX() {
@@ -59,27 +60,9 @@ public class Personnage{
         else if(bas && !estAuSol()){
             this.setY(this.getY()+10);
         }
-
         if (!haut)
             appliqueGravite();
     }
-
-    public void arreter(){
-        if (!droite){
-            this.x.set(this.getX());
-        }
-        else if (!gauche){
-            this.x.set(this.getX());
-        }
-        else if (!haut){
-            this.y.set(this.getY());
-        }
-        else if(!bas){
-            this.y.set(this.getY());
-        }
-    }
-
-
 
     public void DeplacementHeroDroite() { droite = true; }
 
@@ -89,32 +72,17 @@ public class Personnage{
 
     public void DeplacementHeroHaut() {
         haut = true;
-        bas=false;
     }
-
-/*    public void DeplacementHeroBas() {
-        bas = true;
-    }*/
-
     public void arretDeplacementHeroDroite() {
         droite = false;
-
     }
-
     public void arretDeplacementHeroGauche() {
         gauche = false;
-
     }
-
     public void arretDeplacementHeroHaut() {
         haut = false;
-        bas = true;
-
     }
-/*  public void arretDeplacementHeroBas() {
-        bas = false;
 
-    }*/
 
     public boolean estAuSol(){
         boolean sol ;

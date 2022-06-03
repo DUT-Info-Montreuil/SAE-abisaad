@@ -12,4 +12,6 @@ module fr.sae.aquilius {
     opens fr.sae.aquilius.controleur to javafx.fxml;
     exports fr.sae.aquilius.model;
     opens fr.sae.aquilius.model to javafx.fxml;
+    exports fr.sae.aquilius.model.Items;
+    opens fr.sae.aquilius.model.Items to javafx.fxml;
 }

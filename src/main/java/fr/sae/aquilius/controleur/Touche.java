@@ -15,7 +15,6 @@ public class Touche implements EventHandler<KeyEvent> {
     public void handle(KeyEvent e){
         System.out.println(e.getCode());
 
-       // controleur.Controleur(persoTerra);
         switch(e.getCode()) {
 
             case D:
@@ -27,9 +26,6 @@ public class Touche implements EventHandler<KeyEvent> {
             case Z:
                 perso.DeplacementHeroHaut();
                 break;
-       /*     case S:
-                perso.DeplacementHeroBas();
-                break;*/
 
             default:
                 break;

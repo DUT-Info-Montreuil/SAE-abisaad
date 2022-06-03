@@ -15,7 +15,6 @@ import javafx.scene.input.KeyEvent;
         public void handle(KeyEvent e){
             System.out.println(e.getCode());
 
-            // controleur.Controleur(persoTerra);
             switch(e.getCode()) {
 
                 case D:
@@ -27,9 +26,6 @@ import javafx.scene.input.KeyEvent;
                 case Z:
                     perso.arretDeplacementHeroHaut();
                     break;
-//                case S:
-//                    perso.arretDeplacementHeroBas();
-//                    break;
 
 
                 default:
