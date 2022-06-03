@@ -33,8 +33,4 @@ public class PersonnageVue {
         imagePersoP.translateYProperty().bind(personnage.yProperty());
     }
 
-
-
-
-
 }

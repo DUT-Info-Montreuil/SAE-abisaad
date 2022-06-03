@@ -42,7 +42,7 @@ public class Controleur implements Initializable {
         // TERRAIN //
 
         // Personnage //
-        Personnage personnage = new Personnage(180,350);
+        Personnage personnage = new Personnage(180,350 ,terrain);
         this.vuePerso = new PersonnageVue(paneMap,personnage);
         vuePerso.addImgPersonnage();
 
@@ -66,7 +66,6 @@ public class Controleur implements Initializable {
                     // c'est un eventHandler d'ou le lambda
                     (ev ->{
                         personnage.deplacer();
-                        personnage.appliqueGravite();
 
 
                     })

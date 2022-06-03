@@ -13,7 +13,7 @@ public class Personnage{
     private boolean haut;
     private Terrain terrain;
 
-    public Personnage (int x, int y) {
+    public Personnage (int x, int y, Terrain terrain) {
         super();
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
@@ -21,6 +21,7 @@ public class Personnage{
         this.gauche = false;
         this.bas = true;
         this.haut = false;
+        this.terrain = terrain;
     }
 
     public int getX() {
@@ -55,10 +56,12 @@ public class Personnage{
         else if (haut){
             this.setY(this.getY()-10);
         }
-        else if(bas){
+        else if(bas && !estAuSol()){
             this.setY(this.getY()+10);
         }
-        System.out.println(bas);
+
+        if (!haut)
+            appliqueGravite();
     }
 
     public void arreter(){
@@ -89,9 +92,9 @@ public class Personnage{
         bas=false;
     }
 
-   public void DeplacementHeroBas() {
+/*    public void DeplacementHeroBas() {
         bas = true;
-    }
+    }*/
 
     public void arretDeplacementHeroDroite() {
         droite = false;
@@ -109,13 +112,13 @@ public class Personnage{
 
     }
 
-    public void arretDeplacementHeroBas() {
+/*    public void arretDeplacementHeroBas() {
         bas = false;
 
-    }
+    }*/
 
 
-/*    public boolean estAuSol(){
+    public boolean estAuSol(){
         boolean sol ;
         int xPer = this.getX();
         int yPer = this.getY();
@@ -131,10 +134,14 @@ public class Personnage{
         }
         return sol;
 
-    }*/
+    }
 
     public void appliqueGravite(){
-        this.y.set((int)(this.y.getValue()+9.15));
+        if(!estAuSol()){
+            this.y.set((int)(this.y.getValue()+9.15));
+        }
+
     }
+
 
 }

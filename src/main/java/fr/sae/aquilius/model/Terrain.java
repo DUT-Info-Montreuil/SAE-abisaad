@@ -3,7 +3,6 @@ package fr.sae.aquilius.model;
 import com.google.gson.stream.JsonReader;
 
 import java.io.FileReader;
-import java.util.ArrayList;
 
 public class Terrain {
 
@@ -12,7 +11,6 @@ public class Terrain {
     private int sol ; // hauteur du sol
     private int plafond; //hauteur du plafond
     private int[][] codeTuiles ;
-    private ArrayList<Integer> codeTuile = new ArrayList<Integer>();
 
 
     public void lireTerrain() {
@@ -74,11 +72,14 @@ public class Terrain {
     public int getLargeur () {
         return this.largeur;
     }
-    public int getHauteur () { return this.hauteur; }
+    public int getHauteur () {
+        return this.hauteur;
+    }
+
     public int getBlock(int x, int y){
         int block;
-
         block = codeTuiles[y/32][x/32];
+
         return block;
     }
 

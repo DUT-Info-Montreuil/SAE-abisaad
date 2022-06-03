@@ -12,9 +12,6 @@ public class TerrainVue {
 
     private TilePane paneTerrain;
     private Terrain terrain;
-    private ImageView imageSol;
-    private ImageView imageTerre;
-    private ImageView imageCiel;
 
 
     public TerrainVue(TilePane paneTerrain, Terrain terrain) {
@@ -58,5 +55,4 @@ public class TerrainVue {
             }
         }
     }
-
 }
