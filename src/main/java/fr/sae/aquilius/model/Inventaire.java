@@ -1,15 +1,21 @@
 package fr.sae.aquilius.model;
 
-import fr.sae.aquilius.model.Items.EmplacementInventaire;
+import fr.sae.aquilius.model.Items.Items;
 
 import java.util.ArrayList;
 
 public class Inventaire {
 
-    ArrayList<EmplacementInventaire> inventaires;
+    ArrayList<Items> inventaires;
 
     public Inventaire() {
-        this.inventaires=inventaires;
+        this.inventaires= new ArrayList<Items>();
+    }
+
+    public void ajouterItems(Items items){
+        inventaires.add(items);
+
+
     }
 
 
