@@ -3,6 +3,7 @@ package fr.sae.aquilius.controleur;
 import fr.sae.aquilius.model.Inventaire;
 import fr.sae.aquilius.model.Personnage;
 import fr.sae.aquilius.model.Terrain;
+import fr.sae.aquilius.vue.InventaireVue;
 import fr.sae.aquilius.vue.PersonnageVue;
 import fr.sae.aquilius.vue.TerrainVue;
 import javafx.animation.KeyFrame;
@@ -25,9 +26,12 @@ public class Controleur implements Initializable {
     Pane paneMap;
     @FXML
     TilePane paneTerrain;
+    @FXML
+    TilePane paneTerrain2;
 
     private PersonnageVue vuePerso;
     private TerrainVue vueTerrain;
+    private InventaireVue vueInventaire;
     private Timeline gameLoop;
 
 
@@ -41,7 +45,9 @@ public class Controleur implements Initializable {
         // Terrain //
 
         //Inventaire//
-        Inventaire inventaire = new Inventaire();
+        Inventaire inventaire = new Inventaire(paneTerrain2);
+        this.vueInventaire=new InventaireVue(paneTerrain2, inventaire);
+        vueInventaire.addImgEmplacementInventaire();
         //Inventaire//
 
 

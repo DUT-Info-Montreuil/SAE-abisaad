@@ -1,4 +1,6 @@
-package fr.sae.aquilius.model.Items;
+package fr.sae.aquilius.model.Items.Outils;
+
+import fr.sae.aquilius.model.Items.Items;
 
 public class Outils extends Items {
 

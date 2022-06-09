@@ -15,7 +15,6 @@ public class TerrainVue {
 
 
     public TerrainVue(TilePane paneTerrain, Terrain terrain) {
-
         this.terrain = terrain;
         this.paneTerrain = paneTerrain;
 

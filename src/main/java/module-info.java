@@ -18,4 +18,6 @@ module fr.sae.aquilius {
     opens fr.sae.aquilius.model.Items.Nourriture to javafx.fxml;
     exports fr.sae.aquilius.model.Items.Armes;
     opens fr.sae.aquilius.model.Items.Armes to javafx.fxml;
+    exports fr.sae.aquilius.model.Items.Outils;
+    opens fr.sae.aquilius.model.Items.Outils to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package fr.sae.aquilius.model.Items;
+package fr.sae.aquilius.model.Items.Outils;
 
 public class Marteaux extends Outils {
 

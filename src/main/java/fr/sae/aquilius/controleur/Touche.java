@@ -12,6 +12,7 @@ public class Touche implements EventHandler<KeyEvent> {
         this.perso = perso;
     }
 
+
     public void handle(KeyEvent e){
         System.out.println(e.getCode());
 
@@ -26,6 +27,7 @@ public class Touche implements EventHandler<KeyEvent> {
             case Z:
                 perso.DeplacementHeroHaut();
                 break;
+
 
             default:
                 break;

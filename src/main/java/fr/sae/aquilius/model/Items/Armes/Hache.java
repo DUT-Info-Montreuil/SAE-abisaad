@@ -1,6 +1,6 @@
 package fr.sae.aquilius.model.Items.Armes;
 
-import fr.sae.aquilius.model.Items.Outils;
+import fr.sae.aquilius.model.Items.Outils.Outils;
 
 public class Hache extends Outils {
 

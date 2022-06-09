@@ -47,15 +47,49 @@ public class Personnage{
         return y;
     }
 
-    public void deplacer(){
-        if (droite){
-            this.setX(this.getX()+10);
+    public boolean collisionBloc(char sens){
+        boolean bloc ;
+        int xPer = this.getX();
+        int yPer = this.getY();
+        System.out.println("Début systeme collision.");
+
+        if((sens == 'd') && terrain.getBlock(xPer+32,yPer) != 3 ){
+            bloc = true;
+            System.out.println("Bloc droite.");
         }
-        else if (gauche){
-            this.setX(this.getX()-10);
+        else if((sens == 'g') && terrain.getBlock(xPer,yPer) != 3 ){
+            bloc = true;
+            System.out.println("Bloc gauche.");
+        }
+        else {
+            bloc = false;
+            System.out.println("Il n ya pas de bloc.");
+        }
+        System.out.println("Fin systeme collision.");
+        return bloc;
+
+
+    }
+
+    public void deplacer(){
+
+        int xdes;
+        int ydes;
+
+        if (droite && !collisionBloc('d')){
+            xdes = (this.getX())+32;
+            if(xdes <= 960)
+                this.setX(this.getX()+10);
+        }
+        else if (gauche &&!collisionBloc('g')){
+            xdes = (this.getX()-10);
+            if(xdes >= 0)
+                this.setX(this.getX()-10);
         }
         else if (haut){
-            this.setY(this.getY()-10);
+            ydes = (this.getY()-10);
+            if(ydes >= 0)
+                this.setY(this.getY()-10);
         }
         else if(bas && !estAuSol()){
             this.setY(this.getY()+10);
