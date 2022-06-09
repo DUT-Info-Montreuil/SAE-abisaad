@@ -1,6 +1,8 @@
-package fr.sae.aquilius.model.Items;
+package fr.sae.aquilius.model.Items.Nourriture;
 
-public class Nourriture extends Items{
+import fr.sae.aquilius.model.Items.Items;
+
+public class Nourriture extends Items {
 
 
     private int régénérationPV;

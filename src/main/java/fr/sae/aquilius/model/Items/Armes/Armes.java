@@ -1,6 +1,8 @@
-package fr.sae.aquilius.model.Items;
+package fr.sae.aquilius.model.Items.Armes;
 
-public class Armes extends Items{
+import fr.sae.aquilius.model.Items.Items;
+
+public class Armes extends Items {
 
     private int dégats;
 
