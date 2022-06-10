@@ -26,8 +26,6 @@ public class Controleur implements Initializable {
     Pane paneMap;
     @FXML
     TilePane paneTerrain;
-    @FXML
-    TilePane paneTerrain2;
 
     private PersonnageVue vuePerso;
     private TerrainVue vueTerrain;
@@ -45,8 +43,8 @@ public class Controleur implements Initializable {
         // Terrain //
 
         //Inventaire//
-        Inventaire inventaire = new Inventaire(paneTerrain2);
-        this.vueInventaire=new InventaireVue(paneTerrain2, inventaire);
+        Inventaire inventaire = new Inventaire();
+        this.vueInventaire=new InventaireVue(paneMap, inventaire);
         vueInventaire.addImgEmplacementInventaire();
         //Inventaire//
 

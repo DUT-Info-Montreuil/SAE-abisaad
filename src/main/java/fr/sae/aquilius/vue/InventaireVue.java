@@ -3,17 +3,17 @@ package fr.sae.aquilius.vue;
 import fr.sae.aquilius.model.Inventaire;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class InventaireVue {
-    private TilePane paneTerrain2;
+    private Pane paneMap;
     private ImageView imageEmplacementInventaire;
     private Inventaire inventaire ;
 
-    public InventaireVue (TilePane paneTerrain2 , Inventaire inventaire){
+    public InventaireVue (Pane paneMap , Inventaire inventaire){
         Image emplacementInventaire = null;
 
         try {
@@ -21,12 +21,12 @@ public class InventaireVue {
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
         this.imageEmplacementInventaire = new ImageView(emplacementInventaire);
-        this.paneTerrain2 = paneTerrain2;
+        this.paneMap = paneMap;
         this.inventaire = inventaire;
 
     }
     public void addImgEmplacementInventaire() {
-        paneTerrain2.getChildren().add(imageEmplacementInventaire);
+        paneMap.getChildren().add(imageEmplacementInventaire);
     }
 
 }
