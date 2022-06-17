@@ -1,11 +1,10 @@
 package fr.sae.aquilius.controleur;
 
+import fr.sae.aquilius.model.Ennemie;
 import fr.sae.aquilius.model.Inventaire;
 import fr.sae.aquilius.model.Personnage;
 import fr.sae.aquilius.model.Terrain;
-import fr.sae.aquilius.vue.InventaireVue;
-import fr.sae.aquilius.vue.PersonnageVue;
-import fr.sae.aquilius.vue.TerrainVue;
+import fr.sae.aquilius.vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -27,6 +26,18 @@ public class Controleur implements Initializable {
     @FXML
     TilePane paneTerrain;
 
+    private PersonnageVue vuePerso;
+    private EnnemieVue vueEnnemie;
+    private TerrainVue vueTerrain;
+    private InventaireVue vueInventaire;
+
+    public static SanteVue santeVue;
+    private Timeline gameLoop;
+
+    private Clique clique;
+
+    public static Personnage personnage;
+
 
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -46,18 +57,33 @@ public class Controleur implements Initializable {
 
 
         // Personnage //
-        Personnage personnage = new Personnage(180,350 ,terrain, inventaire);
+        personnage = new Personnage(180,350 ,terrain, inventaire, 100);
         PersonnageVue vuePerso = new PersonnageVue(paneMap, personnage);
         vuePerso.addImgPersonnage();
         // Personnage //
 
+        // Ennemie //
+        Ennemie ennemie = new Ennemie(150,350 ,terrain);
+        this.vueEnnemie = new EnnemieVue(paneMap,ennemie);
+        vueEnnemie.addImgEnnemie();
 
+        // Ennemie //
+
+
+        this.santeVue = new SanteVue(paneMap);
+            santeVue.addImgSante(personnage.sante.getValue());
+        // Sante//
 
         // Controle du Personnage //
         borderTerrain.setOnKeyPressed(new Touche(personnage));
         borderTerrain.setOnKeyReleased(new ToucheArret(personnage));
         // Controle du Personnage //
 
+
+        // Controle de la souris sur la MAP //
+        clique = new Clique(paneTerrain);
+        clique.mouseManager();
+        // Controle de la souris sur la MAP //
 
         paneTerrain.setPrefRows(20);
         paneTerrain.setPrefColumns(30);
@@ -67,7 +93,7 @@ public class Controleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.1),
+                Duration.millis(16.33),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
@@ -79,4 +105,5 @@ public class Controleur implements Initializable {
         //Gameloop//
 
     }
+
 }

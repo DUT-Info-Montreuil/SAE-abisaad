@@ -19,8 +19,8 @@ public class InventaireVue {
         Image pioche = null;
 
         try {
-            pioche= new Image(new FileInputStream("/home/etudiants/info/sabi/prive/S1/initiation_au_developpement/dev/SAE_Aquilius/src/main/resources/fr/sae/aquilius/Pioche.png"));
-            emplacementInventaire = new Image(new FileInputStream("/home/etudiants/info/sabi/prive/S1/initiation_au_developpement/dev/SAE_Aquilius/src/main/resources/fr/sae/aquilius/EmplacementInventaire.png"));
+            pioche= new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/Pioche.png"));
+            emplacementInventaire = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/EmplacementInventaire.png"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
         this.imageEmplacementInventaire = new ImageView(emplacementInventaire);

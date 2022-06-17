@@ -1,10 +1,12 @@
 package fr.sae.aquilius.model;
 
+import fr.sae.aquilius.controleur.Controleur;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Personnage{
 
+    public IntegerProperty sante;
     private IntegerProperty y;
     private IntegerProperty x;
     private boolean droite;
@@ -14,7 +16,10 @@ public class Personnage{
     private Terrain terrain;
     private Inventaire inventaire;
 
-    public Personnage (int x, int y, Terrain terrain,Inventaire inventaire) {
+    private int vitesse;
+
+
+    public Personnage (int x, int y, Terrain terrain,Inventaire inventaire, int sante) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.droite = false;
@@ -23,6 +28,12 @@ public class Personnage{
         this.haut = false;
         this.terrain = terrain;
         this.inventaire=inventaire;
+        this.sante =  new SimpleIntegerProperty(sante);
+        this.vitesse = 2;
+    }
+
+    public IntegerProperty getSante() {
+        return this.sante;
     }
 
     public int getX() {
@@ -79,20 +90,20 @@ public class Personnage{
         if (droite && !collisionBloc('d')){
             xdes = (this.getX())+32;
             if(xdes <= 960)
-                this.setX(this.getX()+10);
+                this.setX(this.getX()+this.vitesse);
         }
         else if (gauche &&!collisionBloc('g')){
-            xdes = (this.getX()-10);
+            xdes = (this.getX()-this.vitesse);
             if(xdes >= 0)
-                this.setX(this.getX()-10);
+                this.setX(this.getX()-this.vitesse);
         }
         else if (haut){
-            ydes = (this.getY()-10);
+            ydes = (this.getY()-this.vitesse);
             if(ydes >= 0)
-                this.setY(this.getY()-10);
+                this.setY(this.getY()-this.vitesse);
         }
         else if(bas && !estAuSol()){
-            this.setY(this.getY()+10);
+            this.setY(this.getY()+this.vitesse);
         }
         if (!haut)
             appliqueGravite();
@@ -142,6 +153,26 @@ public class Personnage{
         }
 
     }
+
+//    public int santeFull(){
+//        return this.sante;
+//    }
+
+//    public int sante25Degat(){
+//        return (this.sante - 25);
+//    }
+
+//    public int sante50Degat(){
+//        return (this.sante - 50);
+//    }
+
+//    public int sante75Degat(){
+//        return (this.sante - 75);
+//    }
+
+//    public int sante100Degat(){
+//        return (this.sante - 100);
+//    }
 
 
 }
