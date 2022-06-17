@@ -6,4 +6,21 @@ public class Dague extends Armes {
         super(nom, quantité, dégatsPV);
     }
 
+/*
+    @Override
+    public int getDégats() {
+        return 15;
+    }
+
+    @Override
+    public String getNom() {
+        return "dague";
+    }
+
+    @Override
+    public int getQuantité() {
+        return super.getQuantité();
+    }
+*/
+
 }

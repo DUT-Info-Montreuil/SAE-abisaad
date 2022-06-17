@@ -27,31 +27,27 @@ public class Controleur implements Initializable {
     @FXML
     TilePane paneTerrain;
 
-    private PersonnageVue vuePerso;
-    private TerrainVue vueTerrain;
-    private InventaireVue vueInventaire;
-    private Timeline gameLoop;
-
 
     public void initialize(URL location, ResourceBundle resources) {
 
         // Terrain //
         Terrain terrain = new Terrain(30, 20);
         terrain.lireTerrain();
-        this.vueTerrain=new TerrainVue(paneTerrain,terrain);
+        TerrainVue vueTerrain = new TerrainVue(paneTerrain, terrain);
         vueTerrain.addImgTuilles();
         // Terrain //
 
         //Inventaire//
         Inventaire inventaire = new Inventaire();
-        this.vueInventaire=new InventaireVue(paneMap, inventaire);
+        InventaireVue vueInventaire = new InventaireVue(paneMap, inventaire);
         vueInventaire.addImgEmplacementInventaire();
+        vueInventaire.addImgPioche();
         //Inventaire//
 
 
         // Personnage //
         Personnage personnage = new Personnage(180,350 ,terrain, inventaire);
-        this.vuePerso = new PersonnageVue(paneMap,personnage);
+        PersonnageVue vuePerso = new PersonnageVue(paneMap, personnage);
         vuePerso.addImgPersonnage();
         // Personnage //
 
@@ -67,7 +63,7 @@ public class Controleur implements Initializable {
         paneTerrain.setPrefColumns(30);
 
         //gameloop//
-        gameLoop = new Timeline();
+        Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
