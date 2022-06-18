@@ -206,5 +206,9 @@ fabric.properties
 
 .gradle
 
+out
+
+build
+
 /target/
 /.idea/
