@@ -208,5 +208,7 @@ fabric.properties
 
 out
 
+build
+
 /target/
 /.idea/
