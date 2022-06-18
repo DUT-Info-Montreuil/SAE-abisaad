@@ -61,7 +61,6 @@ public class Controleur implements Initializable {
         // Personnage //
         personnage = new Personnage(180,350 ,terrain, inventaire, 100);
         PersonnageVue vuePerso = new PersonnageVue(paneMap, personnage);
-        vuePerso.addImgPersonnage();
         // Personnage //
 
         // Ennemie //

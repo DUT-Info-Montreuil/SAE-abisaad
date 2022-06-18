@@ -21,6 +21,7 @@ public class Personnage{
     private boolean gauche;
     private boolean bas;
     private boolean haut;
+
     private Terrain terrain;
     private Inventaire inventaire;
 
@@ -69,6 +70,14 @@ public class Personnage{
     }
     public IntegerProperty yProperty(){
         return y;
+    }
+
+    public String getAction() {
+        return action.get();
+    }
+
+    public StringProperty actionProperty() {
+        return action;
     }
 
     public boolean collisionBloc(char sens){
@@ -124,21 +133,27 @@ public class Personnage{
 
         if (droite && !collisionBloc('d')){
             xdes = (this.getX())+32;
+            action.set("Droite");
             if(xdes <= 960)
                 this.setX(this.getX()+this.vitesse);
         }
         else if (gauche &&!collisionBloc('g')){
             xdes = (this.getX()-this.vitesse);
+            action.set("Gauche");
             if(xdes >= 0)
                 this.setX(this.getX()-this.vitesse);
         }
         else if (haut){
             ydes = (this.getY()-this.vitesse);
+            action.set("Haut");
             if(ydes >= 0)
                 this.setY(this.getY()-this.vitesse);
         }
         else if(bas && !estAuSol()){
+            action.set("Bas");
             this.setY(this.getY()+this.vitesse);
+        } else if (!haut && !droite && !gauche) {
+            action.set("immobile");
         }
         if (!haut)
             appliqueGravite();
