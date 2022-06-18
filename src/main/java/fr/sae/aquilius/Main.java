@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            BorderPane root = FXMLLoader.load(Main.class.getResource("vue1.fxml"));
+            BorderPane root = FXMLLoader.load(getClass().getResource("vue1.fxml"));
             Scene scene = new Scene(root,960,640);
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
