@@ -32,6 +32,8 @@ public class Controleur implements Initializable {
     private InventaireVue vueInventaire;
 
     public static SanteVue santeVue;
+
+
     private Timeline gameLoop;
 
     private Clique clique;
@@ -63,15 +65,12 @@ public class Controleur implements Initializable {
         // Personnage //
 
         // Ennemie //
-        Ennemie ennemie = new Ennemie(150,350 ,terrain);
+        Ennemie ennemie = new Ennemie(26,350 ,terrain);
         this.vueEnnemie = new EnnemieVue(paneMap,ennemie);
         vueEnnemie.addImgEnnemie();
 
         // Ennemie //
-
-
-        this.santeVue = new SanteVue(paneMap);
-            santeVue.addImgSante(personnage.sante.getValue());
+        this.santeVue = new SanteVue(paneMap, personnage);
         // Sante//
 
         // Controle du Personnage //
@@ -98,6 +97,7 @@ public class Controleur implements Initializable {
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
                     personnage.deplacer();
+                    ennemie.deplacerEnnemie();
                 })
         );
         gameLoop.getKeyFrames().add(kf);

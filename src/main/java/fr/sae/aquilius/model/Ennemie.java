@@ -2,6 +2,7 @@ package fr.sae.aquilius.model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 
 public class Ennemie {
 
@@ -17,6 +18,12 @@ public class Ennemie {
     private boolean bas;
 
     private boolean estEnVie = true;
+
+    private int largeur ;
+    private ObservableList<Integer> codeTuiles ;
+
+    private final static int PIXEL = 32;
+
 
     public Ennemie(int x, int y, Terrain terrain){
         this.x = new SimpleIntegerProperty(x);
@@ -79,25 +86,20 @@ public class Ennemie {
         boolean bloc ;
         int xEnn = this.getX();
         int yEnn = this.getY();
-        System.out.println("Début systeme collision.");
+
 
         if(terrain.getBlock(xEnn+32,yEnn) != 3 ){
             bloc = true;
-            System.out.println("Bloc droite.");
         }
         else if(terrain.getBlock(xEnn,yEnn) != 3 ){
             bloc = true;
-            System.out.println("Bloc gauche.");
         }
         else if(terrain.getBlock(xEnn,yEnn-32) != 3 ){
             bloc = true;
-            System.out.println("Bloc haut.");
         }
         else {
             bloc = false;
-            System.out.println("Il n ya pas de bloc.");
         }
-        System.out.println("Fin systeme collision.");
         return bloc;
 
 
@@ -126,6 +128,17 @@ public class Ennemie {
             this.y.set((int)(this.y.getValue()+9.15));
         }
 
+    }
+
+    public int getEnnemie(int x, int y){
+        int ennemie;
+        ennemie = codeTuiles.get(getIndice(x,y));
+        return ennemie;
+    }
+
+    public int getIndice(int x, int y) {
+
+        return x/PIXEL + (y/PIXEL) * largeur;
     }
 
 }

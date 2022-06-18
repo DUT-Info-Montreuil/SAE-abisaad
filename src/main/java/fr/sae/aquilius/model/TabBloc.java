@@ -1,5 +1,7 @@
 package fr.sae.aquilius.model;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class TabBloc {
@@ -14,26 +16,26 @@ public class TabBloc {
 
     public void BlocSolide() {
 
-        int[][] codeTuiles = terrain.getCodeTuiles();
+        ObservableList<Integer> codeTuiles = terrain.getCodeTuiles();
 
-        for (int ligne = 0; ligne < codeTuiles.length; ligne++) {
-            for (int col = 0; col < codeTuiles[ligne].length; col++) {
+        for (int ligne = 0; ligne < codeTuiles.size(); ligne++) {
+            //for (int col = 0; col < codeTuiles[ligne].length; col++) {
 
-                int choix = codeTuiles[ligne][col];
-                switch (choix) {
-                    case 1:
-                        listeBloc.add(new Bloc(1, false));
-                        break;
+            int choix = codeTuiles.get(ligne);
+            switch (choix) {
+                case 1:
+                    listeBloc.add(new Bloc(1, false));
+                    break;
 
-                    case 2:
-                        listeBloc.add(new Bloc(2, false));
-                        break;
+                case 2:
+                    listeBloc.add(new Bloc(2, false));
+                    break;
 
-                    case 3:
-                        listeBloc.add(new Bloc(3, false));
-                        break;
-                }
+                case 3:
+                    listeBloc.add(new Bloc(3, false));
+                    break;
             }
+            //}
         }
     }
 }

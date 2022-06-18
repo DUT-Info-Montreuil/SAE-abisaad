@@ -1,6 +1,8 @@
 package fr.sae.aquilius.vue;
 
 import fr.sae.aquilius.controleur.Controleur;
+import fr.sae.aquilius.model.Personnage;
+import javafx.beans.property.IntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -12,23 +14,26 @@ public class SanteVue {
 
     private Pane paneMap;
 
-    private ImageView barreSanteFull;
+    private ImageView barreSante;
 
-    private ImageView barreSanteTroisQuart;
+    /*private ImageView barreSanteFull;*/
+
+/*    private ImageView barreSanteTroisQuart;
 
     private ImageView barreSanteMoitie;
 
     private ImageView barreSanteUnQuart;
 
-    private ImageView barreSanteVide;
+    private ImageView barreSanteVide;*/
 
+    private Image bSFull = null;
+    private Image bSTroisQuart = null;
+    private Image bSMoitie = null;
+    private Image bSUnQuart = null;
+    private Image bSVide = null;
 
-    public SanteVue(Pane paneMap) {
-        Image bSFull = null;
-        Image bSTroisQuart = null;
-        Image bSMoitie = null;
-        Image bSUnQuart = null;
-        Image bSVide = null;
+    public SanteVue(Pane paneMap, Personnage personnage) {
+
 
         try {
             bSFull = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/BarredeVieComplet.png"));
@@ -38,47 +43,31 @@ public class SanteVue {
             bSVide = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/BarredeVieVide.png"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
-        this.barreSanteFull = new ImageView(bSFull);
-        this.barreSanteTroisQuart = new ImageView(bSTroisQuart);
-        this.barreSanteMoitie = new ImageView(bSMoitie);
-        this.barreSanteUnQuart = new ImageView(bSUnQuart);
-        this.barreSanteVide = new ImageView(bSVide);
+
         this.paneMap = paneMap;
+        this.barreSante = new ImageView(bSFull);
+        this.barreSante.setX(845);
+        this.barreSante.setY(3);
+        this.paneMap.getChildren().add(this.barreSante);
+        personnage.getSante().addListener(sante ->{
+            if (((IntegerProperty)sante).getValue() > 75 && ((IntegerProperty)sante).getValue() <= 100){
+                this.barreSante.setImage(bSFull);
+
+            } else if (((IntegerProperty)sante).getValue() > 50 && ((IntegerProperty)sante).getValue() <= 75) {
+                this.barreSante.setImage(bSTroisQuart);
+
+            }else if (((IntegerProperty)sante).getValue() > 25 && ((IntegerProperty)sante).getValue() <= 50){
+                this.barreSante.setImage(bSMoitie);
+
+            }else if (((IntegerProperty)sante).getValue() > 0 && ((IntegerProperty)sante).getValue() <= 25){
+                this.barreSante.setImage(bSUnQuart);
+
+            } else if (((IntegerProperty)sante).getValue() <= 0) {
+                this.barreSante.setImage(bSVide);
+            }
+        });
     }
 
-
-    public void addImgSante(int sante) {
-
-
-
-        if (sante > 75 && sante <= 100){
-            paneMap.getChildren().add(barreSanteFull);
-            barreSanteFull.setX(845);
-            barreSanteFull.setY(3);
-
-
-        } else if (sante > 50 && sante <= 75) {
-            paneMap.getChildren().add(barreSanteTroisQuart);
-            barreSanteTroisQuart.setX(845);
-            barreSanteTroisQuart.setY(3);
-
-        }else if (sante > 25 && sante <= 50){
-            paneMap.getChildren().add(barreSanteMoitie);
-            barreSanteMoitie.setX(845);
-            barreSanteMoitie.setY(3);
-
-        }else if (sante > 0 && sante <= 25){
-            paneMap.getChildren().add(barreSanteUnQuart);
-            barreSanteUnQuart.setX(845);
-            barreSanteUnQuart.setY(3);
-
-        } else if (sante == 0) {
-            paneMap.getChildren().add(barreSanteVide);
-            barreSanteVide.setX(845);
-            barreSanteVide.setY(3);
-        }
-
-    }
 
 
 }

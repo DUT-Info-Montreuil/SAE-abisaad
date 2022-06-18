@@ -1,6 +1,8 @@
 package fr.sae.aquilius.model;
 
 import com.google.gson.stream.JsonReader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.FileReader;
 
@@ -8,9 +10,10 @@ public class Terrain {
 
     private int largeur ;
     private int hauteur ;
+    private final static int PIXEL = 32;
     private int sol ; // hauteur du sol
     private int plafond; //hauteur du plafond
-    private int[][] codeTuiles ;
+    private ObservableList<Integer> codeTuiles ;
 
 
     public void lireTerrain() {
@@ -21,28 +24,8 @@ public class Terrain {
         try (FileReader fileReader = new FileReader("src/main/resources/fr/sae/aquilius/maps.json");
              JsonReader jsonReader = new JsonReader(fileReader))
         {
-            jsonReader.beginObject();
-            // Deduit la taille de la carte.
-            while (jsonReader.hasNext())
-            {
-                hauteur++;
-                jsonReader.nextName();
-                jsonReader.beginArray();
-                while (jsonReader.hasNext()) {
-                    jsonReader.nextInt();
-                    if (!widthSave) largeur++;
-                }
-                jsonReader.endArray();
-                widthSave = true;
-            }
-            jsonReader.endObject();
-        } catch (Exception e) { e.printStackTrace(); }
-
-
-        try (FileReader fileReader = new FileReader("src/main/resources/fr/sae/aquilius/maps.json");
-             JsonReader jsonReader = new JsonReader(fileReader))
-        {
-            codeTuiles = new int[hauteur][largeur];
+            //codeTuiles = new int[hauteur][largeur];
+            codeTuiles = FXCollections.observableArrayList();
             // Ecrit la carte dans la mémoire.
             jsonReader.beginObject();
             while (jsonReader.hasNext())
@@ -50,12 +33,12 @@ public class Terrain {
                 jsonReader.nextName();
                 jsonReader.beginArray();
                 while (jsonReader.hasNext()) {
-                    codeTuiles[i][j] = jsonReader.nextInt();
-                    j++;
+                    codeTuiles.add(jsonReader.nextInt());
+                    //j++;
                 }
                 jsonReader.endArray();
-                j = 0;
-                i++;
+                //j = 0;
+                //i++;
             }
             jsonReader.endObject();
         } catch (Exception e) { e.printStackTrace(); }
@@ -66,14 +49,19 @@ public class Terrain {
         this.hauteur = hauteur;
     }
 
-    public int[][] getCodeTuiles() {
+    public ObservableList<Integer> getCodeTuiles() {
+
         return codeTuiles;
     }
     public int getBlock(int x, int y){
         int block;
-        block = codeTuiles[y/32][x/32];
-
+        block = codeTuiles.get(getIndice(x,y));
         return block;
+    }
+
+    public int getIndice(int x, int y) {
+
+        return x/PIXEL + (y/PIXEL) * largeur;
     }
 
 }
