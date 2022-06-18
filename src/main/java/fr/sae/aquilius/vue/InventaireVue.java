@@ -3,30 +3,37 @@ package fr.sae.aquilius.vue;
 import fr.sae.aquilius.model.Inventaire;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class InventaireVue {
-    private TilePane paneTerrain2;
+    private Pane paneMap;
     private ImageView imageEmplacementInventaire;
+    private ImageView imagePioche;
     private Inventaire inventaire ;
 
-    public InventaireVue (TilePane paneTerrain2 , Inventaire inventaire){
+    public InventaireVue (Pane paneMap , Inventaire inventaire){
         Image emplacementInventaire = null;
+        Image pioche = null;
 
         try {
-            emplacementInventaire = new Image(new FileInputStream("/home/etudiants/info/sabi/prive/S1/initiation_au_developpement/dev/SAE_Aquilius/src/main/resources/fr/sae/aquilius/EmplacementInventaire.png"));
+            pioche= new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/Pioche.png"));
+            emplacementInventaire = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/EmplacementInventaire.png"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
         this.imageEmplacementInventaire = new ImageView(emplacementInventaire);
-        this.paneTerrain2 = paneTerrain2;
+        this.imagePioche= new ImageView(pioche);
+        this.paneMap = paneMap;
         this.inventaire = inventaire;
 
     }
     public void addImgEmplacementInventaire() {
-        paneTerrain2.getChildren().add(imageEmplacementInventaire);
+        paneMap.getChildren().add(imageEmplacementInventaire);
+    }
+    public void addImgPioche() {
+        paneMap.getChildren().add(imagePioche);
     }
 
 }

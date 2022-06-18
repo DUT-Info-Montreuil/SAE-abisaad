@@ -1,11 +1,10 @@
 package fr.sae.aquilius.controleur;
 
+import fr.sae.aquilius.model.Ennemie;
 import fr.sae.aquilius.model.Inventaire;
 import fr.sae.aquilius.model.Personnage;
 import fr.sae.aquilius.model.Terrain;
-import fr.sae.aquilius.vue.InventaireVue;
-import fr.sae.aquilius.vue.PersonnageVue;
-import fr.sae.aquilius.vue.TerrainVue;
+import fr.sae.aquilius.vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -26,13 +25,20 @@ public class Controleur implements Initializable {
     Pane paneMap;
     @FXML
     TilePane paneTerrain;
-    @FXML
-    TilePane paneTerrain2;
 
     private PersonnageVue vuePerso;
+    private EnnemieVue vueEnnemie;
     private TerrainVue vueTerrain;
     private InventaireVue vueInventaire;
+
+    public static SanteVue santeVue;
+
+
     private Timeline gameLoop;
+
+    private Clique clique;
+
+    public static Personnage personnage;
 
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,24 +46,31 @@ public class Controleur implements Initializable {
         // Terrain //
         Terrain terrain = new Terrain(30, 20);
         terrain.lireTerrain();
-        this.vueTerrain=new TerrainVue(paneTerrain,terrain);
+        TerrainVue vueTerrain = new TerrainVue(paneTerrain, terrain);
         vueTerrain.addImgTuilles();
         // Terrain //
 
         //Inventaire//
-        Inventaire inventaire = new Inventaire(paneTerrain2);
-        this.vueInventaire=new InventaireVue(paneTerrain2, inventaire);
+        Inventaire inventaire = new Inventaire();
+        InventaireVue vueInventaire = new InventaireVue(paneMap, inventaire);
         vueInventaire.addImgEmplacementInventaire();
+        vueInventaire.addImgPioche();
         //Inventaire//
 
 
         // Personnage //
-        Personnage personnage = new Personnage(180,350 ,terrain, inventaire);
-        this.vuePerso = new PersonnageVue(paneMap,personnage);
-        vuePerso.addImgPersonnage();
+        personnage = new Personnage(180,350 ,terrain, inventaire, 100);
+        PersonnageVue vuePerso = new PersonnageVue(paneMap, personnage);
         // Personnage //
 
+        // Ennemie //
+        Ennemie ennemie = new Ennemie(26,350 ,terrain);
+        this.vueEnnemie = new EnnemieVue(paneMap,ennemie);
+        vueEnnemie.addImgEnnemie();
 
+        // Ennemie //
+        this.santeVue = new SanteVue(paneMap, personnage);
+        // Sante//
 
         // Controle du Personnage //
         borderTerrain.setOnKeyPressed(new Touche(personnage));
@@ -65,19 +78,25 @@ public class Controleur implements Initializable {
         // Controle du Personnage //
 
 
+        // Controle de la souris sur la MAP //
+        clique = new Clique(paneTerrain);
+        clique.mouseManager();
+        // Controle de la souris sur la MAP //
+
         paneTerrain.setPrefRows(20);
         paneTerrain.setPrefColumns(30);
 
         //gameloop//
-        gameLoop = new Timeline();
+        Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.1),
+                Duration.millis(16.33),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
                     personnage.deplacer();
+                    ennemie.deplacerEnnemie();
                 })
         );
         gameLoop.getKeyFrames().add(kf);
@@ -85,4 +104,5 @@ public class Controleur implements Initializable {
         //Gameloop//
 
     }
+
 }

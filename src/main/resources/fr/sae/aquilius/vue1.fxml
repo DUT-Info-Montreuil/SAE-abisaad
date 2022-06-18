@@ -13,7 +13,6 @@
                 prefWidth="960">
             <children>
                 <TilePane fx:id="paneTerrain" />
-                <TilePane fx:id="paneTerrain2"/>
             </children>
         </Pane>
     </center>

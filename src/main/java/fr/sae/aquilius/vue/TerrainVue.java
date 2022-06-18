@@ -1,6 +1,7 @@
 package fr.sae.aquilius.vue;
 
 import fr.sae.aquilius.model.Terrain;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -32,26 +33,26 @@ public class TerrainVue {
             terre = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/terre.png"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
-        int[][] codeTuiles = terrain.getCodeTuiles();
+        ObservableList<Integer> codeTuiles = terrain.getCodeTuiles();
 
-        for (int ligne = 0; ligne < codeTuiles.length; ligne++) {
-            for (int col = 0; col < codeTuiles[ligne].length; col++) {
+        for (int ligne = 0; ligne < codeTuiles.size(); ligne++) {
+            //for (int col = 0; col < codeTuiles[ligne].length; col++) {
 
-                int choix = codeTuiles[ligne][col];
-                switch (choix) {
-                    case 1:
-                        this.paneTerrain.getChildren().add(new ImageView(sol));
-                        break;
+            int choix = codeTuiles.get(ligne);
+            switch (choix) {
+                case 1:
+                    this.paneTerrain.getChildren().add(new ImageView(sol));
+                    break;
 
-                    case 2:
-                        this.paneTerrain.getChildren().add(new ImageView(terre));
-                        break;
+                case 2:
+                    this.paneTerrain.getChildren().add(new ImageView(terre));
+                    break;
 
-                    case 3:
-                        this.paneTerrain.getChildren().add(new ImageView(ciel));
-                        break;
-                }
+                case 3:
+                    this.paneTerrain.getChildren().add(new ImageView(ciel));
+                    break;
             }
+            //}
         }
     }
 }
