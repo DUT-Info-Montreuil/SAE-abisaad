@@ -41,15 +41,15 @@ public class TerrainVue {
             int choix = codeTuiles.get(ligne);
             switch (choix) {
                 case 1:
-                    this.paneTerrain.getChildren().add(new ImageView(sol));
+                    this.paneTerrain.getChildren().add(new ImageView(ciel));
                     break;
 
                 case 2:
-                    this.paneTerrain.getChildren().add(new ImageView(terre));
+                    this.paneTerrain.getChildren().add(new ImageView(sol));
                     break;
 
                 case 3:
-                    this.paneTerrain.getChildren().add(new ImageView(ciel));
+                    this.paneTerrain.getChildren().add(new ImageView(terre));
                     break;
             }
             //}

@@ -166,13 +166,13 @@ public class Ennemie {
         int yEnn = this.getY();
 
 
-        if(terrain.getBlock(xEnn+40,yEnn) != 3 ){
+        if(terrain.getBlock(xEnn+40,yEnn) != 1 ){
             bloc = true;
         }
-        else if(terrain.getBlock(xEnn,yEnn) != 3 ){
+        else if(terrain.getBlock(xEnn,yEnn) != 1 ){
             bloc = true;
         }
-        else if(terrain.getBlock(xEnn,yEnn-32) != 3 ){
+        else if(terrain.getBlock(xEnn,yEnn-32) !=1 ){
             bloc = true;
         }
         else {
@@ -186,10 +186,10 @@ public class Ennemie {
         int xEnn = this.getX();
         int yEnn = this.getY();
 
-        if(terrain.getBlock(xEnn,yEnn+32) != 3 ){
+        if(terrain.getBlock(xEnn,yEnn+32) != 1 ){
             sol = true;
         }
-        else if(terrain.getBlock(xEnn+32,yEnn+32)!=3){
+        else if(terrain.getBlock(xEnn+32,yEnn+32)!= 1){
             sol= true;
         }
         else {
@@ -204,6 +204,7 @@ public class Ennemie {
             this.y.set((int)(this.y.getValue()+2));
         }
     }
+
 
     public int getEnnemie(int x, int y){
         int ennemie;

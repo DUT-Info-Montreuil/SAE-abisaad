@@ -96,6 +96,7 @@ public class Controleur implements Initializable {
                 (ev ->{
                     personnage.deplacer();
                     ennemie.deplacerEnnemie(personnage);
+                    personnage.attaqueEnnemie(ennemie);
                 })
         );
         gameLoop.getKeyFrames().add(kf);

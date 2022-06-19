@@ -97,11 +97,11 @@ public class Personnage{
         System.out.println("Début systeme collision.");
 
         //Verification collision tête
-        if((sens == 'd') && terrain.getBlock(xPer+32,yPer) != 3 ){
+        if((sens == 'd') && terrain.getBlock(xPer+32,yPer) != 1 ){
             bloc = true;
             System.out.println("Bloc droite.");
         }
-        else if((sens == 'g') && terrain.getBlock(xPer,yPer) != 3 ){
+        else if((sens == 'g') && terrain.getBlock(xPer,yPer) != 1 ){
             bloc = true;
             System.out.println("Bloc gauche.");
         }
@@ -111,11 +111,11 @@ public class Personnage{
         }
 
         //Verification collision pied
-        if((sens == 'd') && terrain.getBlock(xPer+32,yPer+30) != 3 ){
+        if((sens == 'd') && terrain.getBlock(xPer+32,yPer+30) != 1 ){
             bloc = true;
             System.out.println("Bloc droite.");
         }
-        else if((sens == 'g') && terrain.getBlock(xPer,yPer+30) != 3 ){
+        else if((sens == 'g') && terrain.getBlock(xPer,yPer+30) != 1 ){
             bloc = true;
             System.out.println("Bloc gauche.");
         }
@@ -205,16 +205,22 @@ public class Personnage{
         haut = false;
     }
 
+    public void arretDeplacementHero() {
+        haut = false;
+        gauche = false;
+        droite = false;
+    }
+
 
     public boolean estAuSol(){
         boolean sol ;
         int xPer = this.getX();
         int yPer = this.getY();
 
-        if(terrain.getBlock(xPer,yPer+32) != 3 ){
+        if(terrain.getBlock(xPer,yPer+32) != 1 ){
             sol = true;
         }
-        else if(terrain.getBlock(xPer+32,yPer+32)!=3){
+        else if(terrain.getBlock(xPer+32,yPer+32)!=1){
             sol= true;
         }
         else {
@@ -230,6 +236,16 @@ public class Personnage{
         }
 
     }
+
+    public void attaqueEnnemie(Ennemie ennemie){
+        int xPer = this.getX();
+        int yPer = this.getY();
+
+        if (ennemie.getX() == xPer){
+            this.sante.set((int)(this.sante.getValue()-1));
+        }
+    }
+
 
     public int getPersonnage(int x, int y){
         int personnage;
