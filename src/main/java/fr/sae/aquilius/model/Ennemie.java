@@ -2,20 +2,31 @@ package fr.sae.aquilius.model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
 public class Ennemie {
 
-    private IntegerProperty y;
 
     private IntegerProperty x;
+    private IntegerProperty y;
 
     private Terrain terrain;
+
+    private StringProperty action;
+
+    private int vitesse;
+
+    private int compteurSaut;
 
     private boolean gauche;
     private boolean droite;
     private boolean haut;
+
     private boolean bas;
+
+    private boolean saute;
 
     private boolean estEnVie = true;
 
@@ -28,7 +39,10 @@ public class Ennemie {
     public Ennemie(int x, int y, Terrain terrain){
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+        this.action =new SimpleStringProperty("immobile");
         this.terrain = terrain;
+        this.compteurSaut = 0;
+        this.vitesse = 1;
     }
 
 
@@ -55,32 +69,86 @@ public class Ennemie {
 
 
 
-    public void deplacerEnnemie(){
+    public void deplacerEnnemie(Personnage personnage){
 
-        int xEnn;
-        int yEnn;
+        int xenn = this.getX();
+        int yenn = this.getY();
 
-        if (droite && !collisionBloc('d')){
-            xEnn = (this.getX())+32;
-            if(xEnn <= 960)
-                this.setX(this.getX()+10);
+        if (xenn < personnage.getX() && !collisionBloc('d')){
+            xenn = (this.getX())+32;
+            action.set("Droite");
+            if(xenn <= 960)
+                this.setX(this.getX()+this.vitesse);
         }
-        else if (gauche && !collisionBloc('g')){
-            xEnn = (this.getX()-10);
-            if(xEnn >= 0)
-                this.setX(this.getX()-10);
+
+        else if (xenn > personnage.getX() &&!collisionBloc('g')){
+            xenn = (this.getX()-this.vitesse);
+            action.set("Gauche");
+            if(xenn >= 0)
+                this.setX(this.getX()-this.vitesse);
         }
-        else if (haut && !collisionBloc('g')){
-            yEnn = (this.getY()-10);
-            if(yEnn >= 0)
-                this.setY(this.getY()-10);
+        // Debut du saut
+        if (yenn > personnage.getY() && !saute && estAuSol()){
+        yenn = (this.getY()-this.vitesse);
+             if(yenn >= 0) {
+                 this.setY(this.getY() - this.vitesse);
+                 action.set("Haut");
+                 saute = true;
+            }
         }
-        else if(bas && !estAuSol()){
-            this.setY(this.getY()+10);
-        }
-        if (!haut)
+        // Pendant le saut
+        else if (yenn > personnage.getY() && saute && !estAuSol()) {
+             yenn = (this.getY()-this.vitesse);
+             if(yenn >= 0) {
+                 if (compteurSaut <= 34) {
+                        this.setY(this.getY() - this.vitesse);
+                        action.set("Haut");
+                        compteurSaut++;
+                 }else {
+                        saute = false;
+                        compteurSaut = 0;
+                 }
+             }
+        } else if (!haut && saute) {
+
+            saute = false;
+            compteurSaut = 0;
+            action.set("Bas");
+
+        } else if(!estAuSol() && !collisionBloc('b')){
+            action.set("Bas");
             appliqueGravite();
+
+        } else if (!droite && !gauche) {
+            action.set("immobile");
+         }
     }
+
+
+
+
+    public void DeplacementEnnemieDroite() { droite = true; }
+
+    public void DeplacementEnnemieGauche() {
+        gauche = true;
+    }
+
+    public void DeplacementEnnemieHaut() {
+        haut = true;
+    }
+    public void arretDeplacementEnnemieDroite() {
+        droite = false;
+    }
+    public void arretDeplacementEnnemieGauche() {
+        gauche = false;
+    }
+    public void arretDeplacementEnnemieHaut() {
+        haut = false;
+    }
+
+
+
+
 
     public boolean collisionBloc(char t){
         boolean bloc ;
@@ -88,7 +156,7 @@ public class Ennemie {
         int yEnn = this.getY();
 
 
-        if(terrain.getBlock(xEnn+32,yEnn) != 3 ){
+        if(terrain.getBlock(xEnn+40,yEnn) != 3 ){
             bloc = true;
         }
         else if(terrain.getBlock(xEnn,yEnn) != 3 ){
@@ -101,8 +169,6 @@ public class Ennemie {
             bloc = false;
         }
         return bloc;
-
-
     }
 
     public boolean estAuSol(){
@@ -125,7 +191,7 @@ public class Ennemie {
 
     public void appliqueGravite(){
         if(!estAuSol()){
-            this.y.set((int)(this.y.getValue()+9.15));
+            this.y.set((int)(this.y.getValue()+2));
         }
 
     }

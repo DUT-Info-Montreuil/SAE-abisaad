@@ -19,8 +19,11 @@ public class Personnage{
 
     private boolean droite;
     private boolean gauche;
-    private boolean bas;
     private boolean haut;
+
+    private boolean saute;
+
+    private int compteurSaut;
 
     private Terrain terrain;
     private Inventaire inventaire;
@@ -38,10 +41,11 @@ public class Personnage{
         this.action =new SimpleStringProperty("immobile");
         this.droite = false;
         this.gauche = false;
-        this.bas = true;
         this.haut = false;
+        this.saute = false;
         this.terrain = terrain;
         this.inventaire=inventaire;
+        this.compteurSaut = 0;
         this.sante =  new SimpleIntegerProperty(sante);
         this.vitesse = 2;
     }
@@ -80,12 +84,15 @@ public class Personnage{
         return action;
     }
 
+
+
     public boolean collisionBloc(char sens){
         boolean bloc ;
         int xPer = this.getX();
         int yPer = this.getY();
         System.out.println("Début systeme collision.");
 
+        //Verification collision tête
         if((sens == 'd') && terrain.getBlock(xPer+32,yPer) != 3 ){
             bloc = true;
             System.out.println("Bloc droite.");
@@ -98,33 +105,25 @@ public class Personnage{
             bloc = false;
             System.out.println("Il n ya pas de bloc.");
         }
+
+        //Verification collision pied
+        if((sens == 'd') && terrain.getBlock(xPer+32,yPer+30) != 3 ){
+            bloc = true;
+            System.out.println("Bloc droite.");
+        }
+        else if((sens == 'g') && terrain.getBlock(xPer,yPer+30) != 3 ){
+            bloc = true;
+            System.out.println("Bloc gauche.");
+        }
+        else {
+            bloc = false;
+            System.out.println("Il n ya pas de bloc.");
+        }
+
         System.out.println("Fin systeme collision.");
         return bloc;
 
     }
-
-/*    public boolean collisionEnnemie(char t){
-        boolean ennemie ;
-        int xPerso = this.getX();
-        int yPerso = this.getY();
-
-        if(Ennemie.getEnnemie(xPerso+32,yPerso) != 3 ){
-            ennemie = true;
-        }
-        else if(terrain.getBlock(xPerso,yPerso) != 3 ){
-            ennemie = true;
-        }
-        else if(terrain.getBlock(xPerso,yPerso-32) != 3 ){
-            ennemie = true;
-        }
-        else {
-            ennemie = false;
-        }
-        return ennemie;
-
-
-    }*/
-
 
     public void deplacer(){
 
@@ -137,26 +136,50 @@ public class Personnage{
             if(xdes <= 960)
                 this.setX(this.getX()+this.vitesse);
         }
+
         else if (gauche &&!collisionBloc('g')){
             xdes = (this.getX()-this.vitesse);
             action.set("Gauche");
             if(xdes >= 0)
                 this.setX(this.getX()-this.vitesse);
         }
-        else if (haut){
+        // Debut du saut
+        if (haut && !saute && estAuSol()){
             ydes = (this.getY()-this.vitesse);
-            action.set("Haut");
-            if(ydes >= 0)
-                this.setY(this.getY()-this.vitesse);
+            if(ydes >= 0) {
+                this.setY(this.getY() - this.vitesse);
+                action.set("Haut");
+                saute = true;
+            }
         }
-        else if(bas && !estAuSol()){
+        // Pendant le saut
+        else if (haut && saute && !estAuSol()) {
+            ydes = (this.getY()-this.vitesse);
+            if(ydes >= 0) {
+                if (compteurSaut <= 34) {
+                    this.setY(this.getY() - this.vitesse);
+                    action.set("Haut");
+                    compteurSaut++;
+                }else {
+                    saute = false;
+                    compteurSaut = 0;
+                }
+            }
+
+        } else if (!haut && saute) {
+
+            saute = false;
+            compteurSaut = 0;
             action.set("Bas");
-            this.setY(this.getY()+this.vitesse);
-        } else if (!haut && !droite && !gauche) {
+
+        } else if(!estAuSol() && !saute){
+            action.set("Bas");
+            appliqueGravite();
+
+        }
+        else if (!haut && !droite && !gauche) {
             action.set("immobile");
         }
-        if (!haut)
-            appliqueGravite();
     }
 
     public void DeplacementHeroDroite() { droite = true; }
@@ -199,7 +222,7 @@ public class Personnage{
 
     public void appliqueGravite(){
         if(!estAuSol()){
-            this.y.set((int)(this.y.getValue()+9.15));
+            this.y.set((int)(this.y.getValue()+2));
         }
 
     }

@@ -73,8 +73,8 @@ public class Controleur implements Initializable {
         // Sante//
 
         // Controle du Personnage //
-        borderTerrain.setOnKeyPressed(new Touche(personnage));
-        borderTerrain.setOnKeyReleased(new ToucheArret(personnage));
+        borderTerrain.setOnKeyPressed(new Touche(personnage,ennemie));
+        borderTerrain.setOnKeyReleased(new ToucheArret(personnage,ennemie));
         // Controle du Personnage //
 
 
@@ -96,7 +96,7 @@ public class Controleur implements Initializable {
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
                     personnage.deplacer();
-                    ennemie.deplacerEnnemie();
+                    ennemie.deplacerEnnemie(personnage);
                 })
         );
         gameLoop.getKeyFrames().add(kf);

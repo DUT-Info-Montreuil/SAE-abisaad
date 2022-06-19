@@ -19,7 +19,6 @@ public class TabBloc {
         ObservableList<Integer> codeTuiles = terrain.getCodeTuiles();
 
         for (int ligne = 0; ligne < codeTuiles.size(); ligne++) {
-            //for (int col = 0; col < codeTuiles[ligne].length; col++) {
 
             int choix = codeTuiles.get(ligne);
             switch (choix) {
@@ -35,7 +34,6 @@ public class TabBloc {
                     listeBloc.add(new Bloc(3, false));
                     break;
             }
-            //}
         }
     }
 }

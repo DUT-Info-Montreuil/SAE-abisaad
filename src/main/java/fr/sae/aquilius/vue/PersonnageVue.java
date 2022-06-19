@@ -17,6 +17,8 @@ public class PersonnageVue {
     private Image imgPers = null;
     private Image imgPersDroite = null;
     private Image imgPersGauche = null;
+    private Image imgPersDescente = null;
+    private Image imgPersSaut = null;
 
 
     public PersonnageVue(Pane paneMap, Personnage personnage) {
@@ -25,6 +27,8 @@ public class PersonnageVue {
 
         try {
             imgPers = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/persoTerra.png"));
+            imgPersSaut = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/persoTerraSaut.png"));
+            imgPersDescente = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/persoTerraDescente.png"));
             imgPersDroite = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/persoTerraDroite.gif"));
             imgPersGauche = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/persoTerraGauche.gif"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
@@ -44,6 +48,10 @@ public class PersonnageVue {
                 imagePersoP.setImage(imgPersGauche);
             } else if (((StringProperty)action).getValue().equals("immobile")) {
                 imagePersoP.setImage(imgPers);
+            } else if (((StringProperty)action).getValue().equals("Haut")) {
+                imagePersoP.setImage(imgPersSaut);
+            } else if (((StringProperty)action).getValue().equals("Bas")) {
+                imagePersoP.setImage(imgPersDescente);
             }
         });
     }
