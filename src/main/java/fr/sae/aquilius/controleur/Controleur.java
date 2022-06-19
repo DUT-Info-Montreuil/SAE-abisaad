@@ -66,7 +66,6 @@ public class Controleur implements Initializable {
         // Ennemie //
         Ennemie ennemie = new Ennemie(26,350 ,terrain);
         this.vueEnnemie = new EnnemieVue(paneMap,ennemie);
-        vueEnnemie.addImgEnnemie();
 
         // Ennemie //
         this.santeVue = new SanteVue(paneMap, personnage);

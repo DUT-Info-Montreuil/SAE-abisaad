@@ -1,6 +1,7 @@
 package fr.sae.aquilius.vue;
 
 import fr.sae.aquilius.model.Ennemie;
+import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -13,26 +14,47 @@ public class EnnemieVue {
 
     private Pane paneMap;
 
-    private  ImageView imgEnnemieSkeleton;
+    private  ImageView imgEnnemie;
 
     private Ennemie ennemie;
 
+    private Image imgEnn = null;
+    private Image imgEnnDroite = null;
+    private Image imgEnnGauche = null;
+
+
 
     public EnnemieVue(Pane paneMap, Ennemie ennemie) {
-        Image imgSkeleton = null;
 
         try {
-             imgSkeleton = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/Ennemie.png"));
+            imgEnn = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/Ennemie.png"));
+            imgEnnDroite = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/EnnemieDroite.gif"));
+            imgEnnGauche = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/EnnemieGauche.png"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
-        this.imgEnnemieSkeleton = new ImageView(imgSkeleton);
+        this.imgEnnemie = new ImageView(imgEnn);
         this.paneMap = paneMap;
         this.ennemie = ennemie;
+
+        paneMap.getChildren().add(imgEnnemie);
+        imgEnnemie.translateXProperty().bind(ennemie.xProperty());
+        imgEnnemie.translateYProperty().bind(ennemie.yProperty());
+
+        ennemie.actionProperty().addListener(action ->{
+            if (((StringProperty)action).getValue().equals("Droite")){
+                imgEnnemie.setImage(imgEnnDroite);
+            } else if (((StringProperty)action).getValue().equals("Gauche")) {
+                imgEnnemie.setImage(imgEnnGauche);
+            } else if (((StringProperty)action).getValue().equals("immobile")) {
+                imgEnnemie.setImage(imgEnn);
+            }else if (((StringProperty)action).getValue().equals("Haut")) {
+                imgEnnemie.setImage(imgEnn);
+            } else if (((StringProperty)action).getValue().equals("Bas")) {
+                imgEnnemie.setImage(imgEnn);
+            }
+        });
+
     }
 
-    public void addImgEnnemie() {
-        paneMap.getChildren().add(imgEnnemieSkeleton);
-        imgEnnemieSkeleton.translateXProperty().bind(ennemie.xProperty());
-        imgEnnemieSkeleton.translateYProperty().bind(ennemie.yProperty());
-    }
+
 }

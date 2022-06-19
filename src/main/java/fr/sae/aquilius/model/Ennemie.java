@@ -66,6 +66,15 @@ public class Ennemie {
     }
 
 
+    public String getAction() {
+        return action.get();
+    }
+
+    public StringProperty actionProperty() {
+        return action;
+    }
+
+
 
 
 
@@ -87,6 +96,7 @@ public class Ennemie {
             if(xenn >= 0)
                 this.setX(this.getX()-this.vitesse);
         }
+
         // Debut du saut
         if (yenn > personnage.getY() && !saute && estAuSol()){
         yenn = (this.getY()-this.vitesse);
@@ -193,7 +203,6 @@ public class Ennemie {
         if(!estAuSol()){
             this.y.set((int)(this.y.getValue()+2));
         }
-
     }
 
     public int getEnnemie(int x, int y){

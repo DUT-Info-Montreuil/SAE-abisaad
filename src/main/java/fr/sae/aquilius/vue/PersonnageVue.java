@@ -56,10 +56,4 @@ public class PersonnageVue {
         });
     }
 
-/*
-    public void addImgPersonnage() {
-
-}
-*/
-
 }

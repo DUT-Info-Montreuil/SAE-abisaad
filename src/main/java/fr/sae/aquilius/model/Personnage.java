@@ -54,6 +54,10 @@ public class Personnage{
         return this.sante;
     }
 
+    public  void setSante(int sante){
+        this.sante.set(sante);
+    }
+
     public int getX() {
         return this.x.getValue();
     }
