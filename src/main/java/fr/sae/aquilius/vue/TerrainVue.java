@@ -1,6 +1,8 @@
 package fr.sae.aquilius.vue;
 
+import fr.sae.aquilius.controleur.Clique;
 import fr.sae.aquilius.model.Terrain;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,9 +17,10 @@ public class TerrainVue {
     private Terrain terrain;
 
 
-    public TerrainVue(TilePane paneTerrain, Terrain terrain) {
+    public TerrainVue(TilePane paneTerrain, Terrain terrain, Clique clique) {
         this.terrain = terrain;
         this.paneTerrain = paneTerrain;
+        addImgTuilles();
 
     }
 
@@ -36,7 +39,6 @@ public class TerrainVue {
         ObservableList<Integer> codeTuiles = terrain.getCodeTuiles();
 
         for (int ligne = 0; ligne < codeTuiles.size(); ligne++) {
-            //for (int col = 0; col < codeTuiles[ligne].length; col++) {
 
             int choix = codeTuiles.get(ligne);
             switch (choix) {
@@ -52,7 +54,19 @@ public class TerrainVue {
                     this.paneTerrain.getChildren().add(new ImageView(terre));
                     break;
             }
-            //}
         }
+
+        codeTuiles.addListener(new ListChangeListener<Integer>() {
+            @Override
+            public void onChanged(Change<? extends Integer> c) {
+                while (c.next()){
+
+                    for(Object obj : c.getRemoved()){
+                        System.out.println(c.getRemoved());
+                        paneTerrain.getChildren().remove(obj);
+                    }
+                }
+            }
+        });
     }
 }

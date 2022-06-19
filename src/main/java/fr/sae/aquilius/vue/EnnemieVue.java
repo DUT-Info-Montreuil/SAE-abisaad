@@ -29,7 +29,7 @@ public class EnnemieVue {
         try {
             imgEnn = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/Ennemie.png"));
             imgEnnDroite = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/EnnemieDroite.gif"));
-            imgEnnGauche = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/EnnemieGauche.png"));
+            imgEnnGauche = new Image(new FileInputStream("src/main/resources/fr/sae/aquilius/EnnemieGauche.gif"));
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
         this.imgEnnemie = new ImageView(imgEnn);

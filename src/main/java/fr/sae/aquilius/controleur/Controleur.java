@@ -28,7 +28,9 @@ public class Controleur implements Initializable {
 
     private PersonnageVue vuePerso;
     private EnnemieVue vueEnnemie;
+
     private TerrainVue vueTerrain;
+
     private InventaireVue vueInventaire;
 
     public static SanteVue santeVue;
@@ -40,14 +42,15 @@ public class Controleur implements Initializable {
 
     public static Personnage personnage;
 
+    private Terrain terrain;
+
 
     public void initialize(URL location, ResourceBundle resources) {
 
         // Terrain //
-        Terrain terrain = new Terrain(30, 20);
+        terrain = new Terrain(30, 20);
         terrain.lireTerrain();
-        TerrainVue vueTerrain = new TerrainVue(paneTerrain, terrain);
-        vueTerrain.addImgTuilles();
+        TerrainVue vueTerrain = new TerrainVue(paneTerrain, terrain, clique);
         // Terrain //
 
         //Inventaire//
@@ -85,6 +88,7 @@ public class Controleur implements Initializable {
         paneTerrain.setPrefRows(20);
         paneTerrain.setPrefColumns(30);
 
+
         //gameloop//
         Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -97,12 +101,21 @@ public class Controleur implements Initializable {
                     personnage.deplacer();
                     ennemie.deplacerEnnemie(personnage);
                     personnage.attaqueEnnemie(ennemie);
+                    cliqueSouris();
                 })
         );
         gameLoop.getKeyFrames().add(kf);
         gameLoop.play();
         //Gameloop//
 
+    }
+
+    private void cliqueSouris() {
+        if(clique.isCliqueGauche()){
+            terrain.modifierTuile(clique.getSourisX(), clique.getSourisY(), 1);
+        } else if (clique.isCliqueDroit()) {
+            terrain.modifierTuile(clique.getSourisX(), clique.getSourisY(), 2);
+        }
     }
 
 }

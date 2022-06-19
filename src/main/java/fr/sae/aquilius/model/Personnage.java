@@ -94,37 +94,35 @@ public class Personnage{
         boolean bloc ;
         int xPer = this.getX();
         int yPer = this.getY();
-        System.out.println("Début systeme collision.");
+
 
         //Verification collision tête
         if((sens == 'd') && terrain.getBlock(xPer+32,yPer) != 1 ){
             bloc = true;
-            System.out.println("Bloc droite.");
+
         }
         else if((sens == 'g') && terrain.getBlock(xPer,yPer) != 1 ){
             bloc = true;
-            System.out.println("Bloc gauche.");
+
         }
         else {
             bloc = false;
-            System.out.println("Il n ya pas de bloc.");
+
         }
 
         //Verification collision pied
         if((sens == 'd') && terrain.getBlock(xPer+32,yPer+30) != 1 ){
             bloc = true;
-            System.out.println("Bloc droite.");
+
         }
         else if((sens == 'g') && terrain.getBlock(xPer,yPer+30) != 1 ){
             bloc = true;
-            System.out.println("Bloc gauche.");
+
         }
         else {
             bloc = false;
-            System.out.println("Il n ya pas de bloc.");
-        }
 
-        System.out.println("Fin systeme collision.");
+        }
         return bloc;
 
     }

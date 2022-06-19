@@ -53,11 +53,23 @@ public class Terrain {
 
         return codeTuiles;
     }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
     public int getBlock(int x, int y){
         int block;
         block = codeTuiles.get(getIndice(x,y));
         return block;
     }
+
+    public void modifierTuile(int x, int y, int nouveauCodeTuile) {
+        if(codeTuiles.get(getIndice(x,y))!= nouveauCodeTuile){
+            codeTuiles.set(getIndice(x,y),nouveauCodeTuile );
+        }
+    }
+
 
     public int getIndice(int x, int y) {
 

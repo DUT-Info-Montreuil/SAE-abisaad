@@ -29,26 +29,46 @@ public class Clique {
     }
 
 
+    public boolean isCliqueDroit() {
+        return cliqueDroit;
+    }
+
+    public boolean isCliqueGauche() {
+        return cliqueGauche;
+    }
+
+    public int getSourisY() {
+        return SourisY.get();
+    }
+
+    public IntegerProperty sourisYProperty() {
+        return SourisY;
+    }
+
+    public int getSourisX() {
+        return SourisX.get();
+    }
+
+    public IntegerProperty sourisXProperty() {
+        return SourisX;
+    }
+
     public void mouseManager() {
         /* Quand la Souris se deplace dans la map */
-        paneMap.setOnMouseMoved(s -> {
-            SourisX.setValue((int) s.getX());
-            SourisY.setValue((int) s.getY());
+        paneMap.addEventHandler(MouseEvent.ANY, e -> {
+            SourisX.setValue((int) e.getX());
+            SourisY.setValue((int) e.getY());
         });
 
         /* Quand on appuie soit sur le clique droite ou le clique gauche de la souris */
         paneMap.setOnMousePressed(s -> {
             if(s.getButton() == MouseButton.PRIMARY){
-                SourisX.setValue((int) s.getX());
-                SourisY.setValue((int) s.getY());
-                cliqueDroit = true;
+                cliqueGauche = true;
                 
                 System.out.println("Mouse Clicked gauche");
 
             }else if(s.getButton() == MouseButton.SECONDARY){
-                SourisX.setValue((int) s.getX());
-                SourisY.setValue((int) s.getY());
-                cliqueGauche = true;
+                cliqueDroit = true;
                 System.out.println("Mouse Clicked droit");
             }
         });
@@ -56,14 +76,9 @@ public class Clique {
         /* Quand arrete d'appuier soit sur le clique droite ou le clique gauche de la souris */
         paneMap.setOnMouseReleased(s -> {
             if(s.getButton() == MouseButton.PRIMARY){
-                SourisX.setValue((int) s.getX());
-                SourisY.setValue((int) s.getY());
                 cliqueGauche = false;
 
-
             }else if(s.getButton() == MouseButton.SECONDARY){
-                SourisX.setValue((int) s.getX());
-                SourisY.setValue((int) s.getY());
                 cliqueDroit = false;
             }
         });
